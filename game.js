@@ -25,7 +25,7 @@ gameScene.preload = function(){                                                 
     this.load.image('King10', "assets/cardClubsK.png") //King = 10 points
     this.load.image('Queen10', "assets/cardClubsQ.png") //Queen = 10 Points
     this.load.image('Blank', "assets/cardBack_green2")
-    this.load.image('HIT', "assets/HITExample")
+    this.load.image('HIT', "assets/HITExample") //Will be replaced in the future, also need to add a "Pass" button
 }
 
 gameScene.create = function(){                                                      //Create
@@ -37,7 +37,7 @@ gameScene.create = function(){                                                  
     scoreGraphic.fillRect(0, 0, 1000, 50);
 
     //Card Placement Example
-    this.add.sprite(250,650,'Card1')
+    this.add.sprite(250,650,'Card1') //Cards Increment by 100 per card
     this.add.sprite(350,650,'Card2')
     this.add.sprite(450,650,'King10')
 
