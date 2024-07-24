@@ -24,8 +24,32 @@ gameScene.preload = function(){                                                 
     this.load.image('Jack10', "assets/cardClubsJ.png") //Jack = 10 points
     this.load.image('King10', "assets/cardClubsK.png") //King = 10 points
     this.load.image('Queen10', "assets/cardClubsQ.png") //Queen = 10 Points
+    this.load.image('Blank', "assets/cardBack_green2")
+    this.load.image('HIT', "assets/HITExample")
 }
 
 gameScene.create = function(){                                                      //Create
-    this.add.sprite(0,0,'background');
+    let bg = this.add.sprite(0,0,'background');
+    bg.setOrigin(0,0)
+
+    let scoreGraphic = this.add.graphics();
+    scoreGraphic.fillStyle(0x000000, 1); //Will likely use an API for score(?)
+    scoreGraphic.fillRect(0, 0, 1000, 50);
+
+    //Card Placement Example
+    this.add.sprite(250,650,'Card1')
+    this.add.sprite(350,650,'Card2')
+    this.add.sprite(450,650,'King10')
+
+    this.add.sprite(250,200,'Card3')
+    this.add.sprite(350,200,'Card6')
+    this.add.sprite(450,200,'Blank')
+
+    this.add.sprite(800,600,'HIT')
+    this.add.sprite(800,700,'HIT')
+
+}
+
+gameScene.update = function(){                                                      //Update
+
 }
