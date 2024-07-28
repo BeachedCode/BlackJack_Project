@@ -74,3 +74,10 @@ gameScene.update = function()
     this.bottomCardX += 100;
   }
 }
+
+//TO DO:
+//Need to assign a point system to the cards
+//Need to make the first card on the dealer side hidden
+//Need to start with 2 cards instead of 1 on the first spacebar(HIT) press
+//Probably need to add an indicator that shows which side one
+//Need to add a STAND function
