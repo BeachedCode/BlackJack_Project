@@ -79,6 +79,6 @@ gameScene.update = function()
 //Need to assign a point system to the cards
 //Need to make the first card on the dealer side hidden **
 //Need to start with 2 cards instead of 1 on the first spacebar(HIT) press **
-//* - Could be done in one function instead of being seperate
+//** - Could be done in one function instead of being seperate
 //Probably need to add an indicator that shows which side one
 //Need to add a STAND function
