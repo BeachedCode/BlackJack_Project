@@ -2,14 +2,15 @@ let gameScene = new Phaser.Scene('Game');
 
 let config = {
   type: Phaser.AUTO, 
-  width: 1000, 
+  width: 1200, 
   height: 800, 
   scene: gameScene 
 };
 
 let game = new Phaser.Game(config);
 
-gameScene.preload = function(){                                                     //Preload
+gameScene.preload = function()
+{                                                                                         //Preload
     this.load.image('background', "assets/background1.png");
     this.load.image('Card1', "assets/cardClubsA.png") //Ace = 1 point
     this.load.image('Card2', "assets/cardClubs2.png")
@@ -25,31 +26,34 @@ gameScene.preload = function(){                                                 
     this.load.image('King10', "assets/cardClubsK.png") //King = 10 points
     this.load.image('Queen10', "assets/cardClubsQ.png") //Queen = 10 Points
     this.load.image('Blank', "assets/cardBack_green2")
-    this.load.image('HIT', "assets/HITExample") //Will be replaced in the future, also need to add a "Pass" button
+    this.load.image('Rules', "assets/Rules.png")
+    
 }
 
-gameScene.create = function(){                                                      //Create
+gameScene.create = function()
+{                                                                                         //Create
     let bg = this.add.sprite(0,0,'background');
     bg.setOrigin(0,0)
 
     let scoreGraphic = this.add.graphics();
     scoreGraphic.fillStyle(0x000000, 1); //Will likely use an API for score(?)
-    scoreGraphic.fillRect(0, 0, 1000, 50);
+    scoreGraphic.fillRect(0, 0, 1200, 50);
 
     //Card Placement Example
-    this.add.sprite(250,650,'Card1') //Cards Increment by 100 per card
-    this.add.sprite(350,650,'Card2')
-    this.add.sprite(450,650,'King10')
+    this.add.sprite(150,650,'Card1') //Cards Increment by 100 per card
+    this.add.sprite(250,650,'Card2')
+    this.add.sprite(350,650,'King10')
 
-    this.add.sprite(250,200,'Card3')
-    this.add.sprite(350,200,'Card6')
-    this.add.sprite(450,200,'Blank')
+    this.add.sprite(150,200,'Card3')
+    this.add.sprite(250,200,'Card6')
+    this.add.sprite(350,200,'Blank')
 
-    this.add.sprite(800,600,'HIT')
-    this.add.sprite(800,700,'HIT')
-
+    this.add.sprite(1000,600,'Rules')
+    
 }
 
-gameScene.update = function(){                                                      //Update
+gameScene.update = function()
+{                                                                                          //Update
+  
 
 }
