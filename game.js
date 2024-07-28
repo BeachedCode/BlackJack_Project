@@ -40,20 +40,37 @@ gameScene.create = function()
     scoreGraphic.fillRect(0, 0, 1200, 50);
 
     //Card Placement Example
-    this.add.sprite(150,650,'Card1') //Cards Increment by 100 per card
-    this.add.sprite(250,650,'Card2')
-    this.add.sprite(350,650,'King10')
+    //this.add.sprite(150,650,'Card1') //Cards Increment by 100 per card
+    //this.add.sprite(250,650,'Card2')
+    //this.add.sprite(350,650,'King10')
 
-    this.add.sprite(150,200,'Card3')
-    this.add.sprite(250,200,'Card6')
-    this.add.sprite(350,200,'Blank')
+    //this.add.sprite(150,200,'Card3')
+    //this.add.sprite(250,200,'Card6')
+    //this.add.sprite(350,200,'Blank')
 
     this.add.sprite(1000,600,'Rules')
+
+    //Setting the x value for top and bottom cards
+    this.topCardX = 150;
+    this.bottomCardX = 150;
     
 }
 
-gameScene.update = function()
-{                                                                                          //Update
-  
+gameScene.update = function() 
+{
+  this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+  if (Phaser.Input.Keyboard.JustDown(this.spacebar))
+  {
+    //Randomly selecting cards
+    const cardNames = ['Card1', 'Card2', 'Card3', 'Card4', 'Card5', 'Card6', 'Card7', 'Card8', 'Card9', 'Card10', 'Jack10', 'King10', 'Queen10'];
+    const randomTopCard = cardNames[Math.floor(Math.random() * cardNames.length)];
+    const randomBottomCard = cardNames[Math.floor(Math.random() * cardNames.length)];
 
+    // Add cards to the top and bottom rows with increments
+    this.add.sprite(this.topCardX, 200, randomTopCard);
+    this.topCardX += 100;
+
+    this.add.sprite(this.bottomCardX, 650, randomBottomCard);
+    this.bottomCardX += 100;
+  }
 }
