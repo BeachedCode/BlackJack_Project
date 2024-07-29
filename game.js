@@ -102,3 +102,4 @@ gameScene.addCard = function(x, y)
 //Need to add a STAND function.
 //Maybe reveal hidden card in STAND function and add points to dealer before determining winner (Apply math.random to hidden card and replace hidden card with random card)
 //Implement battery API (or some other API)
+//Might need to implement lower probability for face cards (King, Queen, Jack)
