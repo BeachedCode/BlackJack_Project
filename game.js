@@ -10,7 +10,7 @@ let config = {
 let game = new Phaser.Game(config);
 
 gameScene.preload = function()
-{                                                                                         //Preload
+{
     this.load.image('background', "assets/background1.png");
     this.load.image('Card1', "assets/cardClubsA.png") //Ace = 1 point
     this.load.image('Card2', "assets/cardClubs2.png")
@@ -31,7 +31,7 @@ gameScene.preload = function()
 }
 
 gameScene.create = function()
-{                                                                                         //Create
+{
     let bg = this.add.sprite(0,0,'background');
     bg.setOrigin(0,0)
 
@@ -49,7 +49,7 @@ gameScene.create = function()
     this.hiddenCard = true;
 }
 
-gameScene.update = function()                                                            //Update
+gameScene.update = function()
 {
   this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   if (Phaser.Input.Keyboard.JustDown(this.spacebar))
