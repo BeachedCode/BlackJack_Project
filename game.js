@@ -97,7 +97,8 @@ gameScene.addCard = function(x, y)
 }
 
 //TO DO:
-//Need to assign a point system to the cards (Maybe make use of API here?).
+//Need to assign a point system to the cards
 //Probably need to add an indicator that shows which side won.
 //Need to add a STAND function.
 //Maybe reveal hidden card in STAND function and add points to dealer before determining winner (Apply math.random to hidden card and replace hidden card with random card)
+//Implement battery API (or some other API)
