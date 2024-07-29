@@ -36,49 +36,68 @@ gameScene.create = function()
     bg.setOrigin(0,0)
 
     let scoreGraphic = this.add.graphics();
-    scoreGraphic.fillStyle(0x000000, 1); //Will likely use an API for score(?)
+    scoreGraphic.fillStyle(0x000000, 1);
     scoreGraphic.fillRect(0, 0, 1200, 50);
-
-    //Card Placement Example
-    //this.add.sprite(150,650,'Card1') //Cards Increment by 100 per card
-    //this.add.sprite(250,650,'Card2')
-    //this.add.sprite(350,650,'King10')
-
-    //this.add.sprite(150,200,'Card3')
-    //this.add.sprite(250,200,'Card6')
-    //this.add.sprite(350,200,'Blank')
 
     this.add.sprite(1000,600,'Rules')
 
     //Setting the x value for top and bottom cards
-    this.topCardX = 150;
-    this.bottomCardX = 150;
-    
+    this.topCardX = 100;
+    this.bottomCardX = 100;
+    //Boolean values for start of the game
+    this.gameStart = true;
+    this.hiddenCard = true;
 }
 
-gameScene.update = function() 
+gameScene.update = function()                                                            //Update
 {
   this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   if (Phaser.Input.Keyboard.JustDown(this.spacebar))
   {
-    //Randomly selecting cards
-    const cardNames = ['Card1', 'Card2', 'Card3', 'Card4', 'Card5', 'Card6', 'Card7', 'Card8', 'Card9', 'Card10', 'Jack10', 'King10', 'Queen10'];
-    const randomTopCard = cardNames[Math.floor(Math.random() * cardNames.length)];
-    const randomBottomCard = cardNames[Math.floor(Math.random() * cardNames.length)];
+    if (this.gameStart) 
+    {
+      // Deal 2 cards to the dealer
+      this.addCard(this.topCardX, 200);
+      this.addCard(this.topCardX + 100, 200);
+      this.topCardX += 200;
 
-    // Add cards to the top and bottom rows with increments
-    this.add.sprite(this.topCardX, 200, randomTopCard);
-    this.topCardX += 100;
+      // Deal 2 cards to the player
+      this.addCard(this.bottomCardX, 650);
+      this.addCard(this.bottomCardX + 100, 650);
+      this.bottomCardX += 200;
+      this.gameStart = false;
+    } 
+    else 
+    {
+      //Deal 1 card to the dealer
+      this.addCard(this.topCardX, 200);
+      this.topCardX += 100;
 
-    this.add.sprite(this.bottomCardX, 650, randomBottomCard);
-    this.bottomCardX += 100;
+      //Deal 1 card to the player
+      this.addCard(this.bottomCardX, 650);
+      this.bottomCardX += 100;
+    }
+  }
+}
+
+gameScene.addCard = function(x, y) 
+{
+  const cardNames = ['Card1', 'Card2', 'Card3', 'Card4', 'Card5', 'Card6', 'Card7', 'Card8', 'Card9', 'Card10', 'Jack10', 'King10', 'Queen10'];
+  const randomCard = cardNames[Math.floor(Math.random() * cardNames.length)];
+
+  if (y === 200 && this.hiddenCard) 
+  {
+    this.add.sprite(x, y, 'Blank');
+    this.hiddenCard = false;
+  } 
+  else 
+  {
+    this.add.sprite(x, y, randomCard);
   }
 }
 
 //TO DO:
 //Need to assign a point system to the cards (Maybe make use of API here?).
-//Need to make the first card on the dealer side hidden. **
-//Need to start with 2 cards instead of 1 on the first spacebar(HIT) press. **
-//** - Could be done in one function instead of being seperate.
 //Probably need to add an indicator that shows which side won.
 //Need to add a STAND function.
+//Maybe reveal hidden card in STAND function and add points to dealer before determining winner (Apply math.random to hidden card and replace hidden card with random card)
