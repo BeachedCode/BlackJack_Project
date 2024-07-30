@@ -8,7 +8,9 @@ let config = {
 };
 
 let game = new Phaser.Game(config);
-
+let userSum = 0;
+let dealerSum = 0;
+let winner;
 gameScene.preload = function()
 {
     this.load.image('background', "assets/background1.png");
@@ -95,11 +97,31 @@ gameScene.addCard = function(x, y)
     this.add.sprite(x, y, randomCard);
   }
 }
+gameScene.checkWinner = function()
+{if (dealerSum > 21) {
+  winner = 'Player';
+  }
+   else if (userSum > 21) {
+  winner = 'Dealer';
+}
+  else if (userSum === 21) {
+      winner = 'Player';
+  }
+  else if (dealerSum === 21) {
+      winner = 'Dealer';
+  }
+  else if (userSum === dealerSum) {
+      winner = 'Drawn';
+  }
+else {
+  // whoever's closer to 21 wins
+  winner = userSum > dealerSum ? 'Player' : 'Dealer';
+}}
 
 //TO DO:
-//Need to assign a point system to the cards
-//Probably need to add an indicator that shows which side won.
+//Need to assign a point system to the cards 
+//Probably need to add an indicator that shows which side won. (check)
 //Need to add a STAND function.
 //Maybe reveal hidden card in STAND function and add points to dealer before determining winner (Apply math.random to hidden card and replace hidden card with random card)
-//Implement battery API (or some other API)
+//Implement battery API (or some other API) (check)
 //Might need to implement lower probability for face cards (King, Queen, Jack)
