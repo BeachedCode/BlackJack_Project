@@ -150,7 +150,7 @@ gameScene.update = function()
 
 gameScene.addCard = function(x, y) 
 {
-  const cardNames = ['Card1', 'Card2', 'Card3', 'Card4', 'Card5', 'Card6', 'Card7', 'Card8', 'Card9', 'Card10', 'Jack10', 'King10', 'Queen10'];
+  const cardNames = ['Card1', 'Card1', 'Card1', 'Card2', 'Card2', 'Card2', 'Card3', 'Card3', 'Card3', 'Card4', 'Card4', 'Card4', 'Card5', 'Card5', 'Card5', 'Card6', 'Card6', 'Card6', 'Card7', 'Card8', 'Card9', 'Card10', 'Jack10', 'King10', 'Queen10'];
   const randomCard = cardNames[Math.floor(Math.random() * cardNames.length)];
   
   if (y === 200 && this.hiddenCard) 
