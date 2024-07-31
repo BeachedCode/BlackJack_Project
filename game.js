@@ -31,7 +31,7 @@ gameScene.preload = function()
   this.load.image('Jack10', "assets/cardClubsJ.png") //Jack = 10 points
   this.load.image('King10', "assets/cardClubsK.png") //King = 10 points
   this.load.image('Queen10', "assets/cardClubsQ.png") //Queen = 10 Points
-  this.load.image('Blank', "assets/cardBack_green2")
+  this.load.image('Blank', "assets/Blank.png")
   this.load.image('Rules', "assets/Rules.png")
 }
 
