@@ -32,6 +32,7 @@ gameScene.preload = function()
   this.load.image('King10', "assets/cardClubsK.png") //King = 10 points
   this.load.image('Queen10', "assets/cardClubsQ.png") //Queen = 10 Points
   this.load.image('Blank', "assets/Blank.png")
+  this.load.image('Blank2', "assets/Blank2.png")
   this.load.image('Rules', "assets/Rules.png")
 }
 
@@ -155,7 +156,7 @@ gameScene.addCard = function(x, y)
   
   if (y === 200 && this.hiddenCard) 
   {
-    dealtCard = this.add.sprite(x, y, 'Blank');
+    dealtCard = this.add.sprite(x, y, 'Blank2');
     this.hiddenCard = false;
   } 
   else 
