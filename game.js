@@ -13,6 +13,7 @@ let userScore = 0;
 let dealerSum = 0;
 let dealerScore = 0;
 let winner;
+let dealtCard;
 
 gameScene.preload = function()
 {
@@ -70,10 +71,14 @@ gameScene.create = function()
     'Queen10': 10
   }
 
-  // Score Display
+  //Card Array
+  this.cardStack = [];
+
+  //Score Display
   this.userScoreText = this.add.text(50, 510, `Player Score: ${userScore}`, { fontSize: 32, color: 'white' });
   this.dealerScoreText = this.add.text(50, 60, `Dealer Score: ${dealerScore}`, { fontSize: 32, color: 'white' });
 
+  //Game Over Display
   this.winText = this.add.text(600, 25, 'Game Over! Press E to Reset.', { fontSize: 32, color: 'white' });
   this.winText.setOrigin(0.5);
   this.winText.setVisible(false);
@@ -131,8 +136,15 @@ gameScene.update = function()
 
   if (Phaser.Input.Keyboard.JustDown(this.clear))
   {
-    //Test
-    console.log(`Winner: ${winner}`);
+    this.cardStack.forEach(card => card.destroy());
+    this.cardStack = [];
+    this.topCardX = 100;
+    this.bottomCardX = 100;
+    userSum = 0;
+    dealerSum = 0;
+    this.gameStart = true;
+    this.hiddenCard = true;
+    this.winText.setVisible(false);
   }
 }
 
@@ -143,22 +155,24 @@ gameScene.addCard = function(x, y)
   
   if (y === 200 && this.hiddenCard) 
   {
-    this.add.sprite(x, y, 'Blank');
+    dealtCard = this.add.sprite(x, y, 'Blank');
     this.hiddenCard = false;
   } 
   else 
   {
     if (y === 200) 
     {
-      this.add.sprite(x, y, randomCard);
+      dealtCard = this.add.sprite(x, y, randomCard);
       dealerSum += this.cardValues[randomCard];
     } 
     else 
     {
-      this.add.sprite(x, y, randomCard);
+      dealtCard = this.add.sprite(x, y, randomCard);
       userSum += this.cardValues[randomCard];
     }
   }
+
+  this.cardStack.push(dealtCard)
 }
 
 gameScene.checkWinner = function()
@@ -199,6 +213,7 @@ gameScene.revealHiddenCard = function()
 {
   const cardNames = ['Card1', 'Card2', 'Card3', 'Card4', 'Card5', 'Card6', 'Card7', 'Card8', 'Card9', 'Card10', 'Jack10', 'King10', 'Queen10'];
   const randomCard = cardNames[Math.floor(Math.random() * cardNames.length)];
-  this.add.sprite(100, 200, randomCard);
+  dealtCard = this.add.sprite(100, 200, randomCard);
   dealerSum += this.cardValues[randomCard];
+  this.cardStack.push(dealtCard);
 }
