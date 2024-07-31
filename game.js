@@ -30,7 +30,6 @@ gameScene.preload = function()
   this.load.image('Queen10', "assets/cardClubsQ.png") //Queen = 10 Points
   this.load.image('Blank', "assets/cardBack_green2")
   this.load.image('Rules', "assets/Rules.png")
-
 }
 
 gameScene.create = function()
@@ -51,7 +50,7 @@ gameScene.create = function()
   this.gameStart = true;
   this.hiddenCard = true;
 
-    //Card Values
+  //Card Values
   this.cardValues = 
   {
     'Card1': 1,
@@ -68,6 +67,10 @@ gameScene.create = function()
     'King10': 10,
     'Queen10': 10
   }
+
+  // Score Display
+  this.playerScore = this.add.text(50, 510, 'Player Score: 0', { fontSize: 32, color: 'white' });
+  this.dealerScore = this.add.text(50, 60, 'Dealer Score: 0', { fontSize: 32, color: 'white' });
 }
 
 gameScene.update = function()
@@ -108,8 +111,8 @@ gameScene.update = function()
     this.checkWinner();
     //Test Score Display
     console.log(`Winner: ${winner}`);
-    console.log(`Player's Points: ${this.userSum}`);
-    console.log(`Dealer's Points: ${this.dealerSum}`);
+    console.log(`Player's Points: ${userSum}`);
+    console.log(`Dealer's Points: ${dealerSum}`);
   }
 }
 
@@ -128,12 +131,12 @@ gameScene.addCard = function(x, y)
     if (y === 200) 
     {
       this.add.sprite(x, y, randomCard);
-      this.dealerSum += this.cardValues[randomCard];
+      dealerSum += this.cardValues[randomCard];
     } 
     else 
     {
       this.add.sprite(x, y, randomCard);
-      this.userSum += this.cardValues[randomCard];
+      userSum += this.cardValues[randomCard];
     }
   }
 }
@@ -167,6 +170,3 @@ gameScene.revealHiddenCard = function()
   this.add.sprite(100, 200, randomCard);
   this.dealerSum += this.cardValues[randomCard];
 }
-
-//TO DO:
-//Add scores to game canvas
