@@ -9,7 +9,9 @@ let config = {
 
 let game = new Phaser.Game(config);
 let userSum = 0;
+let userScore = 0;
 let dealerSum = 0;
+let dealerScore = 0;
 let winner;
 
 gameScene.preload = function()
@@ -49,7 +51,7 @@ gameScene.create = function()
   //Boolean values for start of the game
   this.gameStart = true;
   this.hiddenCard = true;
-
+  
   //Card Values
   this.cardValues = 
   {
@@ -69,15 +71,20 @@ gameScene.create = function()
   }
 
   // Score Display
-  this.playerScore = this.add.text(50, 510, 'Player Score: 0', { fontSize: 32, color: 'white' });
-  this.dealerScore = this.add.text(50, 60, 'Dealer Score: 0', { fontSize: 32, color: 'white' });
+  this.userScoreText = this.add.text(50, 510, `Player Score: ${userScore}`, { fontSize: 32, color: 'white' });
+  this.dealerScoreText = this.add.text(50, 60, `Dealer Score: ${dealerScore}`, { fontSize: 32, color: 'white' });
+
+  this.winText = this.add.text(600, 25, 'Game Over! Press E to Reset.', { fontSize: 32, color: 'white' });
+  this.winText.setOrigin(0.5);
+  this.winText.setVisible(false);
 }
 
 gameScene.update = function()
 {
   this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-  
+  this.clear = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+
   if (Phaser.Input.Keyboard.JustDown(this.spacebar))
   {
     if (this.gameStart) 
@@ -113,6 +120,19 @@ gameScene.update = function()
     console.log(`Winner: ${winner}`);
     console.log(`Player's Points: ${userSum}`);
     console.log(`Dealer's Points: ${dealerSum}`);
+    console.log(`Player's Score: ${userScore}`);
+    console.log(`Dealer's Score: ${dealerScore}`);
+    //Update Score Board
+    this.userScoreText.setText(`Player Score: ${userScore}`);
+    this.dealerScoreText.setText(`Dealer Score: ${dealerScore}`);
+    //Game Over Text
+    this.winText.setVisible(true);
+  }
+
+  if (Phaser.Input.Keyboard.JustDown(this.clear))
+  {
+    //Test
+    console.log(`Winner: ${winner}`);
   }
 }
 
@@ -140,16 +160,20 @@ gameScene.addCard = function(x, y)
     }
   }
 }
+
 gameScene.checkWinner = function()
 {
   if (dealerSum > 21) {
     winner = 'Player';
+    userScore += 1;
   }
   else if (userSum > 21) {
     winner = 'Dealer';
+    dealerScore += 1;
   } 
   else if (userSum === 21) {
     winner = 'Player';
+    userScore += 1;
   } 
   else if (dealerSum === 21) {
     winner = 'Dealer';
@@ -160,6 +184,14 @@ gameScene.checkWinner = function()
   else {
     // whoever's closer to 21 wins
     winner = userSum > dealerSum ? 'Player' : 'Dealer';
+    if(winner === 'Player')
+    {
+      userScore += 1;
+    }
+    else
+    {
+      dealerScore += 1;
+    }
   }
 }
 
@@ -168,5 +200,5 @@ gameScene.revealHiddenCard = function()
   const cardNames = ['Card1', 'Card2', 'Card3', 'Card4', 'Card5', 'Card6', 'Card7', 'Card8', 'Card9', 'Card10', 'Jack10', 'King10', 'Queen10'];
   const randomCard = cardNames[Math.floor(Math.random() * cardNames.length)];
   this.add.sprite(100, 200, randomCard);
-  this.dealerSum += this.cardValues[randomCard];
+  dealerSum += this.cardValues[randomCard];
 }
