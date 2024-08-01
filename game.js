@@ -178,7 +178,10 @@ gameScene.addCard = function(x, y)
 
 gameScene.checkWinner = function()
 {
-  if (dealerSum > 21) {
+  if (dealerSum > 21 && userSum > 21) {
+    winner = 'No Winner';
+  }
+  else if (dealerSum > 21) {
     winner = 'Player';
     userScore += 1;
   }
@@ -195,7 +198,7 @@ gameScene.checkWinner = function()
   } 
   else if (userSum === dealerSum) {
     winner = 'Draw';
-  } 
+  }
   else {
     // whoever's closer to 21 wins
     winner = userSum > dealerSum ? 'Player' : 'Dealer';
